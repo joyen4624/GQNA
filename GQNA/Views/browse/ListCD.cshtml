@@ -1,0 +1,11 @@
+﻿@model IEnumerable<GQNA.Models.tbl_CD>
+
+<li class="has-dropdown">
+    <a href="#">Hoàn Cảnh Quyên Góp</a>
+    <ul class="submenu">
+        @foreach (var chuDe in Model)
+        {
+    <li><a href="@Url.Action("List", "browse", new { id_CD = chuDe.id_CD })">@chuDe.name_CD</a></li>
+        }
+    </ul>
+</li>

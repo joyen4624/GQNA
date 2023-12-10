@@ -1,0 +1,105 @@
+﻿@model List<GQNA.Models.ProjectView>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout_List.cshtml";
+}
+
+<main>
+    <div class="container" style="padding-top:100px; padding-bottom:30px;">
+
+        <input type="text" id="searchInput" style="margin-bottom:30px;" class="form-control" placeholder="Tìm kiếm dự án...">
+
+        <div class="row tp-gx-20">
+            @foreach (var projectView in Model)
+            {
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="donation-card-box wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">
+                        <div class="card-item">
+                            <div class="tpcard__wrapper white-bg">
+                                <div class="tpcard__img">
+                                    <a href="donation-details.html">
+                                        <img src="@projectView.back" alt="">
+                                    </a>
+                                </div>
+                                <div class="tpcard__content">
+                                    <h4 class="tpcard__title">
+                                        <a href="donation-details.html">
+                                            @projectView.Name
+                                        </a>
+                                    </h4>
+
+                                    <div class="totalAmount">
+                                        <span class="sale">Tổng @string.Format("{0:N0}", projectView.TotalAmount)đ / @string.Format("{0:N0}", projectView.TotalContributed)đ</span>
+                                    </div>
+
+                                    <div class="progress" style="margin-top:80px;  ">
+                                        <div class="progress-bar" role="progressbar" aria-label="Example with label"
+                                             style="width: @(projectView.PercentContributed)%;"
+                                             aria-valuenow="@projectView.PercentContributed"
+                                             aria-valuemin="0" aria-valuemax="100">
+                                            <span>@projectView.PercentContributed%</span>
+                                        </div>
+                                    </div>
+                                    <div class="tpcard__bottom d-flex justify-content-between">
+                                        <div class="tpcard__details">
+                                            <span class="subtitle">Lượt quyên góp</span> <br>
+                                            <span class="sale">@(projectView.TotalSL)</span>
+                                        </div>
+
+                                        <div class="tpcard__details">
+                                            <span class="subtitle">Còn lại</span> <br>
+                                            <span class="sale">@projectView.RemainingDays ngày</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model.Any())
+            {
+                <div class="donation-list-pagination wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
+                    <nav class="donation-pagination mt-20" aria-label="...">
+                        <ul class="pagination justify-content-center">
+                            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                            {
+                                <li class="page-item @(i == ViewBag.Page ? "active" : "")">
+                                    <a class="page-link" href="@Url.Action("List", new { id_CD = ViewBag.id_CD, page = i })">@i</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            }
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#searchInput").on("input", function () {
+                // Lấy giá trị từ ô nhập liệu
+                var searchTerm = $(this).val().toLowerCase();
+
+                // Lọc danh sách dự án dựa trên giá trị nhập liệu
+                $(".donation-card-box").each(function () {
+                    var projectName = $(this).find(".tpcard__title a").text().toLowerCase();
+
+                    // Hiển thị hoặc ẩn dự án tùy thuộc vào việc nó có chứa giá trị tìm kiếm hay không
+                    if (projectName.includes(searchTerm)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</main>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5835a4332a8b4e429a3b61b5cdf5bd3d" Name="Diagram1" DisplayType="true">
+        <EntityTypeShape EntityType="GQNAModel.Project" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GQNAModel.sysdiagram" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GQNAModel.tbl_CD" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GQNAModel.tbl_DT" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GQNAModel.tbl_get_CD" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GQNAModel.tbl_img" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GQNAModel.tbl_NHT" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GQNAModel.tbl_QG" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="GQNAModel.FK_Project_tbl_NHT" ManuallyRouted="false" />
+        <AssociationConnector Association="GQNAModel.FK_tbl_get_CD_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="GQNAModel.FK_tbl_img_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="GQNAModel.FK_tbl_QG_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="GQNAModel.FK_tbl_get_CD_tbl_CD" ManuallyRouted="false" />
+        <AssociationConnector Association="GQNAModel.FK_tbl_QG_tbl_NHT" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

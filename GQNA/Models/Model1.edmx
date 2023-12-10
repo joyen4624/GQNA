@@ -1,0 +1,520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GQNAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="id_project" />
+          </Key>
+          <Property Name="id_project" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_project" Type="nvarchar" MaxLength="255" />
+          <Property Name="img_project" Type="nvarchar" MaxLength="500" />
+          <Property Name="des_project" Type="nvarchar(max)" />
+          <Property Name="project_time_start" Type="datetime" />
+          <Property Name="project_time_end" Type="datetime" />
+          <Property Name="id_DT" Type="int" />
+          <Property Name="project_amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="status" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbl_CD">
+          <Key>
+            <PropertyRef Name="id_CD" />
+          </Key>
+          <Property Name="id_CD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_CD" Type="nvarchar" MaxLength="255" />
+          <Property Name="img_CD" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tbl_DT">
+          <Key>
+            <PropertyRef Name="id_DT" />
+          </Key>
+          <Property Name="id_DT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_DT" Type="nvarchar" MaxLength="255" />
+          <Property Name="avatar_DT" Type="nvarchar" MaxLength="255" />
+          <Property Name="background_DT" Type="nvarchar" MaxLength="255" />
+          <Property Name="back_slide" Type="nvarchar" MaxLength="255" />
+          <Property Name="txt_DT" Type="nvarchar(max)" />
+          <Property Name="des_DT" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_get_CD">
+          <Key>
+            <PropertyRef Name="id_get_CD" />
+          </Key>
+          <Property Name="id_get_CD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_CD" Type="int" />
+          <Property Name="id_Project" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_img">
+          <Key>
+            <PropertyRef Name="id_img" />
+          </Key>
+          <Property Name="id_img" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_project" Type="int" />
+          <Property Name="url_img" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_NHT">
+          <Key>
+            <PropertyRef Name="id_NHT" />
+          </Key>
+          <Property Name="id_NHT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_NHT" Type="nvarchar" MaxLength="255" />
+          <Property Name="pass_NHT" Type="nvarchar" MaxLength="255" />
+          <Property Name="name_NHT" Type="nvarchar" MaxLength="255" />
+          <Property Name="phone_NHT" Type="bigint" />
+          <Property Name="email_NHT" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tbl_QG">
+          <Key>
+            <PropertyRef Name="id_HD" />
+          </Key>
+          <Property Name="id_HD" Type="bigint" Nullable="false" />
+          <Property Name="id_NHT" Type="int" />
+          <Property Name="id_project" Type="int" />
+          <Property Name="ThanhTien" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="NgayQuyenGop" Type="datetime" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_Project_tbl_NHT">
+          <End Role="tbl_DT" Type="Self.tbl_DT" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_DT">
+              <PropertyRef Name="id_DT" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="id_DT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_get_CD_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="tbl_get_CD" Type="Self.tbl_get_CD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="tbl_get_CD">
+              <PropertyRef Name="id_Project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_get_CD_tbl_CD">
+          <End Role="tbl_CD" Type="Self.tbl_CD" Multiplicity="0..1" />
+          <End Role="tbl_get_CD" Type="Self.tbl_get_CD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_CD">
+              <PropertyRef Name="id_CD" />
+            </Principal>
+            <Dependent Role="tbl_get_CD">
+              <PropertyRef Name="id_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_img_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="tbl_img" Type="Self.tbl_img" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="tbl_img">
+              <PropertyRef Name="id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_QG_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="tbl_QG" Type="Self.tbl_QG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="tbl_QG">
+              <PropertyRef Name="id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_QG_tbl_NHT">
+          <End Role="tbl_NHT" Type="Self.tbl_NHT" Multiplicity="0..1" />
+          <End Role="tbl_QG" Type="Self.tbl_QG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_NHT">
+              <PropertyRef Name="id_NHT" />
+            </Principal>
+            <Dependent Role="tbl_QG">
+              <PropertyRef Name="id_NHT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GQNAModelStoreContainer">
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_CD" EntityType="Self.tbl_CD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_DT" EntityType="Self.tbl_DT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_get_CD" EntityType="Self.tbl_get_CD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_img" EntityType="Self.tbl_img" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_NHT" EntityType="Self.tbl_NHT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_QG" EntityType="Self.tbl_QG" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Project_tbl_NHT" Association="Self.FK_Project_tbl_NHT">
+            <End Role="tbl_DT" EntitySet="tbl_DT" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_get_CD_Project" Association="Self.FK_tbl_get_CD_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="tbl_get_CD" EntitySet="tbl_get_CD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_get_CD_tbl_CD" Association="Self.FK_tbl_get_CD_tbl_CD">
+            <End Role="tbl_CD" EntitySet="tbl_CD" />
+            <End Role="tbl_get_CD" EntitySet="tbl_get_CD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_img_Project" Association="Self.FK_tbl_img_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="tbl_img" EntitySet="tbl_img" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_QG_Project" Association="Self.FK_tbl_QG_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="tbl_QG" EntitySet="tbl_QG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_QG_tbl_NHT" Association="Self.FK_tbl_QG_tbl_NHT">
+            <End Role="tbl_NHT" EntitySet="tbl_NHT" />
+            <End Role="tbl_QG" EntitySet="tbl_QG" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GQNAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="id_project" />
+          </Key>
+          <Property Name="id_project" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_project" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="img_project" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="des_project" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="project_time_start" Type="DateTime" Precision="3" />
+          <Property Name="project_time_end" Type="DateTime" Precision="3" />
+          <Property Name="id_DT" Type="Int32" />
+          <Property Name="project_amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_DT" Relationship="Self.FK_Project_tbl_NHT" FromRole="Project" ToRole="tbl_DT" />
+          <NavigationProperty Name="tbl_get_CD" Relationship="Self.FK_tbl_get_CD_Project" FromRole="Project" ToRole="tbl_get_CD" />
+          <NavigationProperty Name="tbl_img" Relationship="Self.FK_tbl_img_Project" FromRole="Project" ToRole="tbl_img" />
+          <NavigationProperty Name="tbl_QG" Relationship="Self.FK_tbl_QG_Project" FromRole="Project" ToRole="tbl_QG" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_CD">
+          <Key>
+            <PropertyRef Name="id_CD" />
+          </Key>
+          <Property Name="id_CD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_CD" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="img_CD" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_get_CD" Relationship="Self.FK_tbl_get_CD_tbl_CD" FromRole="tbl_CD" ToRole="tbl_get_CD" />
+        </EntityType>
+        <EntityType Name="tbl_DT">
+          <Key>
+            <PropertyRef Name="id_DT" />
+          </Key>
+          <Property Name="id_DT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_DT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="avatar_DT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="background_DT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="back_slide" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="txt_DT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="des_DT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Project_tbl_NHT" FromRole="tbl_DT" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="tbl_get_CD">
+          <Key>
+            <PropertyRef Name="id_get_CD" />
+          </Key>
+          <Property Name="id_get_CD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_CD" Type="Int32" />
+          <Property Name="id_Project" Type="Int32" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_tbl_get_CD_Project" FromRole="tbl_get_CD" ToRole="Project" />
+          <NavigationProperty Name="tbl_CD" Relationship="Self.FK_tbl_get_CD_tbl_CD" FromRole="tbl_get_CD" ToRole="tbl_CD" />
+        </EntityType>
+        <EntityType Name="tbl_img">
+          <Key>
+            <PropertyRef Name="id_img" />
+          </Key>
+          <Property Name="id_img" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_project" Type="Int32" />
+          <Property Name="url_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_tbl_img_Project" FromRole="tbl_img" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="tbl_NHT">
+          <Key>
+            <PropertyRef Name="id_NHT" />
+          </Key>
+          <Property Name="id_NHT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_NHT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="pass_NHT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_NHT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="phone_NHT" Type="Int64" />
+          <Property Name="email_NHT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_QG" Relationship="Self.FK_tbl_QG_tbl_NHT" FromRole="tbl_NHT" ToRole="tbl_QG" />
+        </EntityType>
+        <EntityType Name="tbl_QG">
+          <Key>
+            <PropertyRef Name="id_HD" />
+          </Key>
+          <Property Name="id_HD" Type="Int64" Nullable="false" />
+          <Property Name="id_NHT" Type="Int32" />
+          <Property Name="id_project" Type="Int32" />
+          <Property Name="ThanhTien" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NgayQuyenGop" Type="DateTime" Precision="3" />
+          <Property Name="TrangThai" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_tbl_QG_Project" FromRole="tbl_QG" ToRole="Project" />
+          <NavigationProperty Name="tbl_NHT" Relationship="Self.FK_tbl_QG_tbl_NHT" FromRole="tbl_QG" ToRole="tbl_NHT" />
+        </EntityType>
+        <Association Name="FK_Project_tbl_NHT">
+          <End Role="tbl_DT" Type="Self.tbl_DT" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_DT">
+              <PropertyRef Name="id_DT" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="id_DT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_get_CD_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="tbl_get_CD" Type="Self.tbl_get_CD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="tbl_get_CD">
+              <PropertyRef Name="id_Project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_img_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="tbl_img" Type="Self.tbl_img" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="tbl_img">
+              <PropertyRef Name="id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_QG_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="tbl_QG" Type="Self.tbl_QG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="tbl_QG">
+              <PropertyRef Name="id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_get_CD_tbl_CD">
+          <End Role="tbl_CD" Type="Self.tbl_CD" Multiplicity="0..1" />
+          <End Role="tbl_get_CD" Type="Self.tbl_get_CD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_CD">
+              <PropertyRef Name="id_CD" />
+            </Principal>
+            <Dependent Role="tbl_get_CD">
+              <PropertyRef Name="id_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_QG_tbl_NHT">
+          <End Role="tbl_NHT" Type="Self.tbl_NHT" Multiplicity="0..1" />
+          <End Role="tbl_QG" Type="Self.tbl_QG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_NHT">
+              <PropertyRef Name="id_NHT" />
+            </Principal>
+            <Dependent Role="tbl_QG">
+              <PropertyRef Name="id_NHT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GQNAEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tbl_CD" EntityType="Self.tbl_CD" />
+          <EntitySet Name="tbl_DT" EntityType="Self.tbl_DT" />
+          <EntitySet Name="tbl_get_CD" EntityType="Self.tbl_get_CD" />
+          <EntitySet Name="tbl_img" EntityType="Self.tbl_img" />
+          <EntitySet Name="tbl_NHT" EntityType="Self.tbl_NHT" />
+          <EntitySet Name="tbl_QG" EntityType="Self.tbl_QG" />
+          <AssociationSet Name="FK_Project_tbl_NHT" Association="Self.FK_Project_tbl_NHT">
+            <End Role="tbl_DT" EntitySet="tbl_DT" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_get_CD_Project" Association="Self.FK_tbl_get_CD_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="tbl_get_CD" EntitySet="tbl_get_CD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_img_Project" Association="Self.FK_tbl_img_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="tbl_img" EntitySet="tbl_img" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_QG_Project" Association="Self.FK_tbl_QG_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="tbl_QG" EntitySet="tbl_QG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_get_CD_tbl_CD" Association="Self.FK_tbl_get_CD_tbl_CD">
+            <End Role="tbl_CD" EntitySet="tbl_CD" />
+            <End Role="tbl_get_CD" EntitySet="tbl_get_CD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_QG_tbl_NHT" Association="Self.FK_tbl_QG_tbl_NHT">
+            <End Role="tbl_NHT" EntitySet="tbl_NHT" />
+            <End Role="tbl_QG" EntitySet="tbl_QG" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GQNAModelStoreContainer" CdmEntityContainer="GQNAEntities3">
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="GQNAModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="id_project" ColumnName="id_project" />
+                <ScalarProperty Name="name_project" ColumnName="name_project" />
+                <ScalarProperty Name="img_project" ColumnName="img_project" />
+                <ScalarProperty Name="des_project" ColumnName="des_project" />
+                <ScalarProperty Name="project_time_start" ColumnName="project_time_start" />
+                <ScalarProperty Name="project_time_end" ColumnName="project_time_end" />
+                <ScalarProperty Name="id_DT" ColumnName="id_DT" />
+                <ScalarProperty Name="project_amount" ColumnName="project_amount" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GQNAModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_CD">
+            <EntityTypeMapping TypeName="GQNAModel.tbl_CD">
+              <MappingFragment StoreEntitySet="tbl_CD">
+                <ScalarProperty Name="id_CD" ColumnName="id_CD" />
+                <ScalarProperty Name="name_CD" ColumnName="name_CD" />
+                <ScalarProperty Name="img_CD" ColumnName="img_CD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_DT">
+            <EntityTypeMapping TypeName="GQNAModel.tbl_DT">
+              <MappingFragment StoreEntitySet="tbl_DT">
+                <ScalarProperty Name="id_DT" ColumnName="id_DT" />
+                <ScalarProperty Name="name_DT" ColumnName="name_DT" />
+                <ScalarProperty Name="avatar_DT" ColumnName="avatar_DT" />
+                <ScalarProperty Name="background_DT" ColumnName="background_DT" />
+                <ScalarProperty Name="back_slide" ColumnName="back_slide" />
+                <ScalarProperty Name="txt_DT" ColumnName="txt_DT" />
+                <ScalarProperty Name="des_DT" ColumnName="des_DT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_get_CD">
+            <EntityTypeMapping TypeName="GQNAModel.tbl_get_CD">
+              <MappingFragment StoreEntitySet="tbl_get_CD">
+                <ScalarProperty Name="id_get_CD" ColumnName="id_get_CD" />
+                <ScalarProperty Name="id_CD" ColumnName="id_CD" />
+                <ScalarProperty Name="id_Project" ColumnName="id_Project" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_img">
+            <EntityTypeMapping TypeName="GQNAModel.tbl_img">
+              <MappingFragment StoreEntitySet="tbl_img">
+                <ScalarProperty Name="id_img" ColumnName="id_img" />
+                <ScalarProperty Name="id_project" ColumnName="id_project" />
+                <ScalarProperty Name="url_img" ColumnName="url_img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_NHT">
+            <EntityTypeMapping TypeName="GQNAModel.tbl_NHT">
+              <MappingFragment StoreEntitySet="tbl_NHT">
+                <ScalarProperty Name="id_NHT" ColumnName="id_NHT" />
+                <ScalarProperty Name="user_NHT" ColumnName="user_NHT" />
+                <ScalarProperty Name="pass_NHT" ColumnName="pass_NHT" />
+                <ScalarProperty Name="name_NHT" ColumnName="name_NHT" />
+                <ScalarProperty Name="phone_NHT" ColumnName="phone_NHT" />
+                <ScalarProperty Name="email_NHT" ColumnName="email_NHT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_QG">
+            <EntityTypeMapping TypeName="GQNAModel.tbl_QG">
+              <MappingFragment StoreEntitySet="tbl_QG">
+                <ScalarProperty Name="id_HD" ColumnName="id_HD" />
+                <ScalarProperty Name="id_NHT" ColumnName="id_NHT" />
+                <ScalarProperty Name="id_project" ColumnName="id_project" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+                <ScalarProperty Name="NgayQuyenGop" ColumnName="NgayQuyenGop" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,89 @@
+﻿@model GQNA.Models.tbl_NHT
+@{
+    ViewBag.Title = "login";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+
+        @using (Html.BeginForm("Register", "account", FormMethod.Post))
+        {
+
+            @Html.AntiForgeryToken()
+
+            if (TempData["PasswordMismatchError"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["PasswordMismatchError"]
+                </div>
+            }
+
+            if (TempData["EmailVError"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["EmailVError"]
+                </div>
+            }
+
+            <h1>Đăng ký tài khoản</h1>
+            <div class="social-container">
+                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social"><i class="fab fa-google"></i></a>
+                <a href="#" class="social"><i class="fab fa-apple"></i></a>
+            </div>
+            <span>or use your email for registration</span>
+            @Html.TextBox("user_NHT", null, new { @class = "email", placeholder = "Nhập tên đăng nhập" })
+            @Html.ValidationMessage("user_NHT")
+
+            @Html.TextBox("email_NHT", null, new { @class = "email", placeholder = "Nhập email" })
+            @Html.ValidationMessage("email_NHT")
+
+            @Html.Password("pass_NHT", null, new { @class = "password", placeholder = "Nhập mật khẩu" })
+            @Html.ValidationMessage("pass_NHT")
+
+            @Html.Password("confirmPassword", null, new { @class = "password", placeholder = "Nhập lại mật khẩu" })
+            @Html.ValidationMessage("confirmPassword")
+
+            <button>Đăng ký</button>
+        }
+    </div>
+    <div class="form-container sign-in-container">
+        @using (Html.BeginForm("login", "account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <h1>Đăng nhập</h1>
+            <div class="social-container">
+                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social"><i class="fab fa-google"></i></a>
+                <a href="#" class="social"><i class="fab fa-apple"></i></a>
+            </div>
+            <span>or use your account</span>
+            @Html.EditorFor(model => model.user_NHT, new { htmlAttributes = new { @class = "email" } })
+            @Html.ValidationMessageFor(model => model.user_NHT, "", new { @class = "text-danger" })
+
+            @Html.PasswordFor(model => model.pass_NHT, new { htmlAttributes = new { @class = "password" } })
+            @Html.ValidationMessageFor(model => model.pass_NHT, "", new { @class = "text-danger" })
+
+            <a href="#">Quên mật khẩu?</a>
+            <button>Đăng nhập</button>
+        }
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Chào mừng bạn trở lại!</h1>
+                <p>Hãy đăng nhập ngay để quyên góp ngay nào</p>
+                <button class="ghost" id="signIn">Đăng nhập</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Xin chào bạn!</h1>
+                <p>Tạo tại khoản ngay để có thể quyên góp nhé đến các hoàn cảnh khó khắn nhé1</p>
+                <button class="ghost" id="signUp">Đăng ký</button>
+            </div>
+        </div>
+    </div>
+</div>
+

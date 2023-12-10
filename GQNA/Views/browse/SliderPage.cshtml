@@ -1,0 +1,15 @@
+﻿@model List<GQNA.Models.tbl_img>
+
+<div class="owl-carousel-wrapper">
+    <div class="box-92819">
+        <h4 class="text-white mb-3">GiveNow (Gây quỹ nhân ái) là nền tảng giúp bạn dễ dàng chung tay quyên góp tiền cùng hàng triệu người, giúp đỡ các hoàn cảnh khó khăn trên khắp cả nước.</h4>
+        <p><a href="#" class="btn btn-primary py-3 px-4 rounded-0">Quyên góp ngay</a></p>
+    </div>
+
+    <div class="owl-carousel owl-1">
+        @foreach (var img in Model)
+        {
+            <div class="ftco-cover-1 overlay" style="background-image: url('@img.url_img');"></div>
+        }
+    </div>
+</div>

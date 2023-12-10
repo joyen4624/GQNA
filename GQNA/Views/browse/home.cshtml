@@ -1,0 +1,134 @@
+﻿@{
+    var cssVersion = DateTime.Now.Ticks;
+}
+@{
+    ViewBag.Title = "home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.Action("SliderPage", "browse")
+@Html.Action("ChooseProject", "browse")
+
+@Html.Action("fact", "browse")
+
+
+<section class="card-area card-area-2 pt-130 pb-130">
+    <div class="container">
+        <div class="row slide-bottom">
+            <div class="row mb-5 align-items-st">
+                <div class="col-md-4">
+                    <div class="heading-20219">
+                        <h2 class="title text-cursive">
+                            Dự án đang gây quỹ
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <p>Gây quỹ nhân ái là nền tảng giúp bạn dễ dàng chung tay quyên góp tiền cùng hàng triệu người, giúp đỡ các hoàn cảnh khó khăn trên khắp cả nước.</p>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 nav-button">
+                <div class="next-btn">
+                    <div class="cause-slider-nav"></div>
+                </div>
+            </div>
+        </div>
+
+        @Html.Action("projectSlider", "browse")
+        <div class="row" style="padding-top:20px;">
+            <div class="tpcard-btn d-flex justify-content-center mt-55">
+                <a class="tp-btn tp-btn-shine-effect" href="@Url.Action("tatcaduan", "browse")">Xem tất cả</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- volunteers area 4 start -->
+<section class="volunteers-area-3 pt-20 pb-115" style="padding-top:100px; padding-bottom:100px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-5 col-md-12">
+                <div class="volunteers-section-3__wrapper volunteers-breadcrumb mt-30">
+                    <span class="section-sub-title has-before wow fadeInLeft" data-wow-duration="1s"
+                          data-wow-delay=".3s"> Về chúng tôi</span>
+                    <h3 class="section-title wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
+                        GiveNow là gì?
+                    </h3>
+                    <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
+                        GiveNow là nền tảng gây quỹ cộng đồng trực tuyến tiện lợi, tin cậy và minh bạch.
+                        <br />
+                        GiveNow được tin dùng bởi các tổ chức cộng đồng uy tín như: Quỹ Bảo Trợ Trẻ Em Việt Nam, Operation Smile, Quỹ Vì Tầm Vóc Việt, Pan Nature, Mạng Lưới Ung Thư Vú Việt Nam, Trung tâm hợp tác phát triển Tây Bắc và nhiều tổ chức khác.
+                    </p>
+                    <div class="tpcta-4-btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".9s">
+                        <a class="tp-btn tp-btn-shine-effect" href="contact-us.html">Quyên góp ngay</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-7 col-md-12">
+                <div class="tpvolunteers__thumb p-relative wow fadeInRight" data-wow-duration="1s"
+                     data-wow-delay=".5s">
+                    <div class="tpvolunteers-3__img-1 d-none d-md-block">
+                        <img src="https://cdn.thuvienphapluat.vn/phap-luat/2022-2/TN/060123/Chia-se-tinh-thuong-1.jpg" />
+                    </div>
+                    <div class="tpvolunteers-3__img-2 d-none d-md-block">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- volunteers area 4 end -->
+
+@Html.Action("SlideDT", "browse")
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js'></script>
+<script src="~/Content/js/slider.js?v=@cssVersion"></script>
+<script>
+    // brand slider
+    $('.brand-active').slick({
+        dots: false,
+        arrows: false,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 5,
+        prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-arrow-left"></i></button>',
+        nextArrow: '<button type="button" class="slick-next"><i class="fa-regular fa-arrow-right"></i></button>',
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+
+        ]
+    });
+</script>
+
+

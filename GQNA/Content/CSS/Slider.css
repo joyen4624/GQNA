@@ -1,0 +1,25 @@
+﻿.slide-bottom
+{
+    margin-top:20px;
+}
+
+.nav-button{
+    margin-top:-150px;
+    left:80% !important;
+}
+
+.inFoDt {
+    margin-top: -20px;
+    margin-left: 25px;
+}
+
+.totalAmount {
+    position: absolute;
+    margin-top: -40px;
+}
+
+.logo-DT {
+    height: 80px;
+    width: 90px;
+
+}

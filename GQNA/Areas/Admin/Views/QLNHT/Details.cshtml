@@ -1,0 +1,51 @@
+﻿@model GQNA.Models.tbl_NHT
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_NHT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name_NHT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name_NHT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.avatar_NHT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.avatar_NHT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.background_NHT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.background_NHT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.des_NHT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.des_NHT)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_NHT }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

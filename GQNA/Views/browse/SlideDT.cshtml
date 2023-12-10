@@ -1,0 +1,26 @@
+﻿@model IEnumerable<GQNA.Models.tbl_DT>
+
+<!-- brand area start -->
+<div class="brand-area grey pt-125">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="brand-section">
+                    <p class="brand-title text-center has-before has-after">Các đối tác đồng hành</p>
+                </div>
+                <div class="brand-active mt-50 mb-5 ml-30">
+                    @foreach (var logo in Model)
+                    {
+                        <div class="single-brand">
+                            <a href="#">
+                                <img class="logo-DT" src="~/Content/images/ImgNHT/@logo.avatar_DT" />
+                            </a>
+                        </div>
+                    }
+
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- brand area end -->

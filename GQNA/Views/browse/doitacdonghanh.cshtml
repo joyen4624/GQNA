@@ -1,0 +1,62 @@
+﻿@model List<GQNA.Models.tbl_DT>
+@{
+    ViewBag.Title = "doitacdonghanh";
+    Layout = "~/Views/Shared/_Layout_ListDT.cshtml";
+}
+
+<main>
+    <!-- Our volunteer area start -->
+    <div class="our-volunteers-area pt-95 pb-130" style="padding-top:100px; padding-bottom:50px;">
+        <div class="container">
+            <div class="row">
+                @foreach (var partner in Model)
+                {
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <div class="our-volunteers-box p-relative mt-30">
+                            <div class="team__wrapper bg-white">
+                                <div class="team__img">
+
+                                    <img class="logo" src="~/Content/images/ImgNHT/@partner.avatar_DT" />
+                                </div>
+
+                                <div class="team-social text-center">
+                                    <a href="#" target="_blank">
+                                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.7 0H5.6C4.67174 0 3.7815 0.368749 3.12513 1.02513C2.46875 1.6815 2.1 2.57174 2.1 3.5V5.6H0V8.4H2.1V14H4.9V8.4H7L7.7 5.6H4.9V3.5C4.9 3.31435 4.97375 3.1363 5.10502 3.00503C5.2363 2.87375 5.41435 2.8 5.6 2.8H7.7V0Z"
+                                                  fill="currentColor" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" target="_blank">
+                                        <svg width="14" height="11" viewBox="0 0 14 11" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M13.2 0.00616444C12.6254 0.420252 11.9893 0.736962 11.316 0.944099C10.9546 0.519583 10.4744 0.218697 9.94022 0.0821348C9.40604 -0.0544271 8.8437 -0.0200759 8.32925 0.180543C7.8148 0.381161 7.37306 0.738367 7.06379 1.20385C6.75451 1.66933 6.59262 2.22063 6.6 2.78319V3.39622C5.54558 3.42415 4.50076 3.18522 3.55861 2.7007C2.61645 2.21618 1.80619 1.50112 1.2 0.619194C1.2 0.619194 -1.2 6.13646 4.2 8.58857C2.96432 9.44557 1.49229 9.87528 0 9.81463C5.4 12.8798 12 9.81463 12 2.7648C11.9994 2.59404 11.9834 2.4237 11.952 2.25598C12.5644 1.63896 12.9965 0.859938 13.2 0.00616444Z"
+                                                  fill="currentColor" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" target="_blank">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.98575 3.78931C8.99078 3.78931 9.95464 4.18855 10.6653 4.89921C11.376 5.60988 11.7752 6.57374 11.7752 7.57877V11.9998H9.2489V7.57877C9.2489 7.24376 9.11582 6.92247 8.87893 6.68558C8.64205 6.4487 8.32076 6.31561 7.98575 6.31561C7.65074 6.31561 7.32945 6.4487 7.09257 6.68558C6.85568 6.92247 6.7226 7.24376 6.7226 7.57877V11.9998H4.19629V7.57877C4.19629 6.57374 4.59553 5.60988 5.3062 4.89921C6.01686 4.18855 6.98072 3.78931 7.98575 3.78931V3.78931Z"
+                                                  fill="currentColor" />
+                                            <path d="M2.52631 4.42114H0V12.0001H2.52631V4.42114Z" fill="currentColor" />
+                                            <path d="M1.26315 2.52631C1.96077 2.52631 2.52631 1.96077 2.52631 1.26315C2.52631 0.565533 1.96077 0 1.26315 0C0.565533 0 0 0.565533 0 1.26315C0 1.96077 0.565533 2.52631 1.26315 2.52631Z"
+                                                  fill="currentColor" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <div class="team__authur">
+                                    <span class="team__title"><a href="@Url.Action("chitiet", "doitac", new { id = partner.id_DT })">@partner.name_DT</a></span>
+                                    <p>Đối tác đồng hành</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                   
+                </div>
+        </div>
+    </div>
+    <!-- Our volunteer area end -->
+</main>
+

@@ -1,0 +1,234 @@
+﻿@model GQNA.Models.Project
+@{
+    ViewBag.Title = "detail";
+    Layout = "~/Views/Shared/_Layout_Detail.cshtml";
+}
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+    /* CSS tùy chỉnh cho modal */
+    .custom-modal {
+        max-width: 800px; /* Điều chỉnh kích thước theo ý của bạn */
+        margin: auto;
+    }
+</style>
+
+
+<main>
+
+    <div class="donation-details-area pt-100 pb-90" style="padding-top:100px;padding-bottom:150px;">
+        <div class="container">
+            <div class="title-Project" style="padding-bottom: 30px;">
+                <h2 class="txtProject">@Model.name_project</h2>
+                <h4 class="txtDes" style="padding-top:10px;">❤️ Phép màu y tế sẽ giúp thắp sáng đôi mắt, mang một đôi chân lành lặn, bàn tay linh hoạt, nụ cười hạnh phúc hay một cơ thể khỏe mạnh cho 10 em nhỏ kém may mắn.</h4>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="donation-details-item">
+                        <div class="donation-card-box donaion-details">
+                            <div class="card-item">
+                                <div class="tpcard__wrapper donation-details">
+
+                                    <div class="tpcard__thumb donation-details">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-12 product-left mb-5 mb-lg-0">
+                                                    <div class="swiper-container product-slider mb-3">
+                                                        <div class="swiper-wrapper">
+                                                            @foreach (var image in Model.tbl_img)
+                                                            {
+                                                                <div class="swiper-slide">
+                                                                    <img src="@image.url_img" alt="Project Image" class="img-fluid">
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                        <div class="swiper-button-next"></div>
+                                                        <div class="swiper-button-prev"></div>
+                                                    </div>
+
+                                                    <div class="swiper-container product-thumbs">
+                                                        <div class="swiper-wrapper">
+                                                            @foreach (var image in Model.tbl_img)
+                                                            {
+                                                                <div class="swiper-slide">
+                                                                    <img src="@image.url_img" alt="Project Image" class="img-fluid">
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tpcard__content donation-details">
+                                        <h2 class="tpcard__title donation-details text-center">
+                                            THÔNG TIN QUYÊN GÓP
+                                        </h2>
+
+                                        <div class="tpcard__progresss">
+                                            <div class="progress donation-details">
+                                                <div class="progress-bar donation-details" role="progressbar"
+                                                     aria-label="Example with label" style="width: @ViewBag.PercentContributed%;"
+                                                     aria-valuenow="@ViewBag.PercentContributed" aria-valuemin="0" aria-valuemax="100">
+                                                    <span>@ViewBag.PercentContributed%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tpcard__bottom d-flex justify-content-between">
+                                            <div class="tpcard__details donation-details">
+                                                <span class="subtitle">Tổng</span> <br>
+                                                <span class="sale">@ViewBag.FormattedAmount</span>
+                                            </div>
+                                            <div class="tpcard__details donation-details">
+                                                <span class="subtitle text-center">Đã nhận được</span> <br>
+                                                <span class="sale">@ViewBag.TotalAmountContributed.ToString("N0") VNĐ</span>
+                                            </div>
+                                            <div class="tpcard__details donation-details">
+                                                <span class="subtitle text-end">Thời gian còn lại</span> <br>
+                                                <span class="sale">Còn lại @ViewBag.DaysLeft ngày</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="donation-btn">
+                            <button class="tp-btn tp-btn-shine-effect" data-toggle="modal" data-target="#donationModal" data-id="@Model.id_project" data-project-name="@Model.name_project" data-project-image="@Model.img_project">Quyên góp</button>
+                        </div>
+
+
+                        <div class="grid nav-detail">
+                            <div class="container">
+                                <ol class="breadcrumb">
+                                    <li class="active"><a href="#">Câu chuyện</a></li>
+                                    <li><a href="#">Nhà hảo tâm</a></li>
+                                    <li><a href="#">Tin tức cộng đồng</a></li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div id="story">
+                            <div class="donation-details-text mt-60">
+                                @Html.Raw(Model.des_project)
+                            </div>
+                        </div>
+
+                        <div id="donater">
+                            <div class="donation-details-text mt-60">
+                                <h3 class="sidebar__widget-title donation-details">Nhà hảo tâm mới nhất</h3>
+                                <div class="sidebar__widget donation-details mb-40">
+                                    <div class="sidebar__widget-content donation-details">
+                                        <ul>
+                                            @foreach (var contributor in ViewBag.Contributors)
+                                            {
+                                                <li>
+                                                    <a href="donation-listing.html">
+                                                        <img class="round" width="60" height="60" avatar="@contributor.TenNguoiQuyenGop">
+                                                        <span class="name-user">@contributor.TenNguoiQuyenGop </span>
+                                                        <span class="user-price">@contributor.SoTienQuyenGop đ</span>
+                                                        <br />
+                                                        <span class="user-phone">@contributor.SoDienThoai</span>
+                                                    </a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="right-padding pl-25">
+                        <div class="sidebar__widget donation-details mb-40" style="height:460px;">
+                            <h3 class="sidebar__widget-title donation-details">Đối tác đồng hành </h3>
+                            <div class="sidebar__widget-content donation-details">
+                                <ul>
+                                    <li><a href="@Url.Action("chitiet", "doitac", new { id = @ViewBag.PartnerId })">
+    @ViewBag.PartnerName
+    <img src="~/Content/images/ImgNHT/@ViewBag.PartnerLogo" />
+
+</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        @Html.Action("RelatedProject", "browse")
+
+                    </div>
+        </div>
+    </div>
+    <!-- Blog details area end -->
+                        <!-- Modal -->
+                        <div class="modal fade custom-modal" id="donationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="donationModalTitle"></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <!-- Ảnh dự án -->
+                                                <img id="projectImage" alt="Ảnh dự án" class="img-fluid" src="@Model.img_project">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <!-- Tên dự án -->
+                                                <h5 id="projectName">@Model.name_project</h5>
+                                                <!-- Ô nhập số tiền -->
+                                                <input type="number" id="amountInput" name="amountInput" placeholder="Số tiền quyên góp" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                        <button type="button" class="btn btn-primary" id="btnDonate">Quyên góp</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+</main>
+
+<script>
+    $('.btnDonate').click(function () {
+        var projectId = $(this).data('id');
+
+
+        // Hiển thị thông tin dự án trong modal
+        $('#donationModalTitle').text('Thông tin quyên góp cho dự án ' + projectId);
+       
+
+        // Lưu ID dự án vào trường ẩn trong modal
+        $('#projectIdInput').val(projectId);
+
+        // Mở modal
+        $('#donationModal').modal('show');
+    });
+
+    $('#btnDonate').click(function () {
+       var projectId = @Model.id_project;
+        var amount = $('#amountInput').val();
+
+        // Kiểm tra nếu số tiền không hợp lệ
+        if (amount <= 0) {
+            alert('Vui lòng nhập số tiền hợp lệ.');
+            return;
+        }
+
+        // Thực hiện chuyển hướng đến trang thanh toán với ID và số tiền
+        window.location.href = '/quyengop/thanhtoan?id=' + projectId + '&amountT=' + amount;
+    });
+
+</script>

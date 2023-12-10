@@ -1,0 +1,128 @@
+﻿@model GQNA.Models.Project
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Admin.cshtml";
+}
+
+
+<link href="~/Areas/Admin/Content/plugins/select2/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- Thư viện jQuery UI -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Danh sách admin</li>
+                        <li class="breadcrumb-item active">Thêm mới admin</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Thêm mới dự án</h3>
+                        </div>
+
+                        <style>
+                            #editor {
+                                width: 100%; /* Đặt độ rộng theo nhu cầu của bạn */
+                                max-width: 800px; /* Đặt độ rộng tối đa nếu cần */
+                                margin: 0 auto; /* Canh giữa nếu cần */
+                            }
+                        </style>
+
+                        <h3>Are you sure you want to delete this?</h3>
+                        <div>
+                            <h4>Project</h4>
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.name_project)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.name_project)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.img_project)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.img_project)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.des_project)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.des_project)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.project_time_start)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.project_time_start)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.project_time_end)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.project_time_end)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.project_amount)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.project_amount)
+                                </dd>
+
+                            </dl>
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-actions no-color">
+                                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                                    @Html.ActionLink("Back to List", "Index")
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+</div>

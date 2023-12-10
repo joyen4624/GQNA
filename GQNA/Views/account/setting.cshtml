@@ -1,0 +1,392 @@
+﻿@model GQNA.Models.tbl_NHT
+@{
+    ViewBag.Title = "setting";
+    Layout = "~/Views/Shared/_Layout_Setting.cshtml";
+}
+
+<style>
+    .ui-w-80 {
+        width: 80px !important;
+        height: auto;
+    }
+
+    .btn-default {
+        border-color: rgba(24,28,33,0.1);
+        background: rgba(0,0,0,0);
+        color: #4E5155;
+    }
+
+    label.btn {
+        margin-bottom: 0;
+    }
+
+    .btn-outline-primary {
+        border-color: #26B4FF;
+        background: transparent;
+        color: #26B4FF;
+    }
+
+    .btn {
+        cursor: pointer;
+    }
+
+    .text-light {
+        color: #babbbc !important;
+    }
+
+    .btn-facebook {
+        border-color: rgba(0,0,0,0);
+        background: #3B5998;
+        color: #fff;
+    }
+
+    .btn-instagram {
+        border-color: rgba(0,0,0,0);
+        background: #000;
+        color: #fff;
+    }
+
+    .card {
+        background-clip: padding-box;
+        box-shadow: 0 1px 4px rgba(24,28,33,0.012);
+    }
+
+    .row-bordered {
+        overflow: hidden;
+    }
+
+    .account-settings-fileinput {
+        position: absolute;
+        visibility: hidden;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+    }
+
+    .account-settings-links .list-group-item.active {
+        font-weight: bold !important;
+    }
+
+    html:not(.dark-style) .account-settings-links .list-group-item.active {
+        background: transparent !important;
+    }
+
+    .account-settings-multiselect ~ .select2-container {
+        width: 100% !important;
+    }
+
+    .light-style .account-settings-links .list-group-item {
+        padding: 0.85rem 1.5rem;
+        border-color: rgba(24, 28, 33, 0.03) !important;
+    }
+
+        .light-style .account-settings-links .list-group-item.active {
+            color: #4e5155 !important;
+        }
+
+    .material-style .account-settings-links .list-group-item {
+        padding: 0.85rem 1.5rem;
+        border-color: rgba(24, 28, 33, 0.03) !important;
+    }
+
+        .material-style .account-settings-links .list-group-item.active {
+            color: #4e5155 !important;
+        }
+
+    .dark-style .account-settings-links .list-group-item {
+        padding: 0.85rem 1.5rem;
+        border-color: rgba(255, 255, 255, 0.03) !important;
+    }
+
+        .dark-style .account-settings-links .list-group-item.active {
+            color: #fff !important;
+        }
+
+    .light-style .account-settings-links .list-group-item.active {
+        color: #4E5155 !important;
+    }
+
+    .light-style .account-settings-links .list-group-item {
+        padding: 0.85rem 1.5rem;
+        border-color: rgba(24,28,33,0.03) !important;
+    }
+</style>
+
+<div class="container light-style flex-grow-1 container-p-y" style="padding-top:100px;padding-bottom:100px;">
+
+    <h4 class="font-weight-bold py-3 mb-4">
+        Quản lý tài khoản
+    </h4>
+    @if (TempData["ProfileUpdateSuccess"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["ProfileUpdateSuccess"]
+        </div>
+    }
+
+    @using (Html.BeginForm("setting", "account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">Tổng quan</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Đổi mật khẩu</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-history-payment">Lịch sử quyên góp</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-social-links">Mạng xã hội</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+
+                            <div class="card-body media align-items-center">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="d-block ui-w-80">
+                                <div class="media-body ml-4">
+                                    <label class="btn btn-outline-primary">
+                                        Upload new photo
+                                        <input type="file" class="account-settings-fileinput">
+                                    </label> &nbsp;
+                                    <button type="button" class="btn btn-default md-btn-flat">Reset</button>
+
+                                    <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                                </div>
+                            </div>
+                            <hr class="border-light m-0">
+
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Tên đăng nhập</label>
+                                    <input type="text" class="form-control mb-1" name="user_NHT" value="@Model.user_NHT">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Họ và tên</label>
+                                    <input type="text" class="form-control" name="name_NHT" value="@Model.name_NHT">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">E-mail</label>
+                                    <input type="text" class="form-control mb-1" name="email_NHT" value="@Model.email_NHT">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Số điện thoại</label>
+                                    <input type="text" class="form-control mb-1" name="phone_NHT" value="@Model.phone_NHT">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="account-change-password">
+                            <div class="card-body pb-2">
+                                @if (TempData["PasswordChangeSuccess"] != null)
+                                {
+                                    <div class="alert alert-success" role="alert">
+                                        @TempData["PasswordChangeSuccess"]
+                                    </div>
+                                }
+
+                                <div class="form-group">
+                                    <label class="form-label">Mật khẩu hiện tại</label>
+                                    <input type="password" class="form-control" name="changePasswordModel.CurrentPassword">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Mật khẩu mới</label>
+                                    <input type="password" class="form-control" name="changePasswordModel.NewPassword">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Nhập lại mật khẩu mới</label>
+                                    <input type="password" class="form-control" name="changePasswordModel.ConfirmPassword">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="account-social-links">
+                            <div class="card-body pb-2">
+
+                                <div class="form-group">
+                                    <label class="form-label">Twitter</label>
+                                    <input type="text" class="form-control" value="https://twitter.com/user">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Facebook</label>
+                                    <input type="text" class="form-control" value="https://www.facebook.com/user">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Google+</label>
+                                    <input type="text" class="form-control" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">LinkedIn</label>
+                                    <input type="text" class="form-control" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Instagram</label>
+                                    <input type="text" class="form-control" value="https://www.instagram.com/user">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-connections">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-twitter">Connect to <strong>Twitter</strong></button>
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <h5 class="mb-2">
+                                    <a href="javascript:void(0)" class="float-right text-muted text-tiny"><i class="ion ion-md-close"></i> Remove</a>
+                                    <i class="ion ion-logo-google text-google"></i>
+                                    You are connected to Google:
+                                </h5>
+                                nmaxwell@mail.com
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-facebook">Connect to <strong>Facebook</strong></button>
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-instagram">Connect to <strong>Instagram</strong></button>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="account-notifications">
+                            <div class="card-body pb-2">
+
+                                <h6 class="mb-4">Activity</h6>
+
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" checked="">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Email me when someone comments on my article</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" checked="">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Email me when someone answers on my forum thread</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Email me when someone follows me</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body pb-2">
+
+                                <h6 class="mb-4">Application</h6>
+
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" checked="">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">News and announcements</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Weekly product updates</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" checked="">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Weekly blog digest</span>
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Billing history card-->
+                        <div class="tab-pane fade card mb-4" id="account-history-payment">
+                            <div class="card-header">Lịch sử quyên góp</div>
+                            <div class="card-body p-0">
+                                <!-- Billing history table-->
+                                <div class="table-responsive table-billing-history">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-gray-200" scope="col">Mã hóa đơn</th>
+                                                <th class="border-gray-200" scope="col">Ngày</th>
+                                                <th class="border-gray-200" scope="col">Tổng</th>
+                                                <th class="border-gray-200" scope="col">Trạng thái</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var payment in ViewBag.PaymentHistory)
+                                            {
+                                            <tr>
+                                                <td>@payment.id_HD</td>
+                                                <td>@payment.NgayQuyenGop</td>
+                                                <td>@payment.ThanhTien</td>
+                                                <td><span class="badge @GetBadgeClass(payment.TrangThai)">@payment.TrangThai</span></td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-right mt-3">
+            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>&nbsp;
+            <button type="button" class="btn btn-default">Hủy</button>
+        </div>
+    }
+</div>
+
+@functions
+{
+    string GetBadgeClass(string status)
+    {
+        // Đặt màu sắc cho badge dựa trên trạng thái
+        switch (status)
+        {
+            case "Pending":
+                return "bg-light text-dark"; // Chữ màu đen
+            case "Paid":
+                return "bg-success text-white"; // Chữ màu trắng
+                                                // Các trạng thái khác có thể được thêm vào tùy thuộc vào nhu cầu của bạn
+            default:
+                return "bg-secondary text-white"; // Chữ màu trắng
+        }
+    }
+
+}

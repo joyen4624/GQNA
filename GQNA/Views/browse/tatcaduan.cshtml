@@ -1,0 +1,103 @@
+﻿@model IEnumerable<GQNA.Models.Project>
+
+@{
+    ViewBag.Title = "tatcaduan";
+    Layout = "~/Views/Shared/_Layout_List.cshtml";
+}
+
+
+<main>
+    <!-- donation listing breadcrumb start -->
+    <div class="wrapper-box p-relative">
+        <div class="breadcrumb-bg" data-background="https://nld.mediacdn.vn/k:2016/89-tin-anhdao-1473776509519/vannghegayquygiupdotreemkhuyettat.jpg"></div>
+        <div class="breadcrumb-area pt-265 pb-230">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="breadcrumb__content text-center">
+                            <h1 class="breadcrumb__title">Donation listing</h1>
+                            <div class="breadcrumb__list">
+                                <span><a href="index.html">Home</a></span>
+                                <span class="dvdr"><i class="fa-solid fa-colon"></i></span>
+                                <span class="underline">Campains</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- donation listing breadcrumb end -->
+    <!-- donation listing area start -->
+    <div class="donation-list-area pt-100 pb-130">
+
+        <div class="container" style="padding-top:100px;">
+            <div class="row tp-gx-20">
+                @foreach (var CD in Model)
+                {
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="donation-card-box wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">
+                            <div class="card-item">
+                                <div class="tpcard__wrapper white-bg">
+                                    <div class="tpcard__img">
+                                        <a href="donation-details.html"><img src="@CD.img_project" alt=""></a>
+                                    </div>
+                                    <div class="tpcard__content">
+                                        <h4 class="tpcard__title">
+                                            <a href="donation-details.html">
+                                                @CD.name_project
+                                            </a>
+                                        </h4>
+                                        <div class="tpcard__progresss">
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-label="Example with label"
+                                                     style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                    <span>75%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tpcard__bottom d-flex justify-content-between">
+                                            <div class="tpcard__details">
+                                                <span class="subtitle">our goal</span> <br>
+                                                <span class="sale">$34.0000</span>
+                                            </div>
+                                            <div class="tpcard__details">
+                                                <span class="subtitle">Raised</span> <br>
+                                                <span class="sale">$11.9098</span>
+                                            </div>
+                                            <div class="tpcard__details">
+                                                <span class="subtitle">to go</span> <br>
+                                                <span class="sale">$56,000</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (Model.Any())
+                {
+                    <div class="donation-list-pagination wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
+                        <nav class="donation-pagination mt-20" aria-label="...">
+                            <ul class="pagination justify-content-center">
+                                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                                {
+                                    <li class="page-item @(i == ViewBag.Page ? "active" : "")">
+                                        <a class="page-link" href="@Url.Action("tatcaduan", new { id_project = ViewBag.id_project, page = i })">@i</a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+    <!-- donation listing area end -->
+
+</main>
+

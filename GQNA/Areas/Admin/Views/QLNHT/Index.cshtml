@@ -1,0 +1,52 @@
+﻿@model IEnumerable<GQNA.Models.tbl_NHT>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name_NHT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.avatar_NHT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.background_NHT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.des_NHT)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name_NHT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.avatar_NHT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.background_NHT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.des_NHT)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_NHT }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_NHT }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_NHT })
+        </td>
+    </tr>
+}
+
+</table>

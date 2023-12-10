@@ -1,0 +1,28 @@
+﻿pre {
+    margin: 20px 0;
+    padding: 20px;
+    background: #fafafa;
+}
+
+.round {
+    border-radius: 50%;
+    width: 25px !important;
+    height: 25px !important;
+}
+
+.sidebar__widget-content ul li a span.name-user {
+float:left;
+left:13%;
+position:absolute;
+font-size:15px;
+}
+
+.sidebar__widget-content ul li a span.user-phone {
+margin-left:6%;
+float:left;
+}
+
+.sidebar__widget-content ul li a span.user-price{
+    margin-top:1.5%;
+    font-size:15px;
+}

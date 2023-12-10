@@ -1,0 +1,51 @@
+﻿@model GQNA.Models.Project
+
+<div class="sidebar__widget-contact" style="margin-top:30px;background-color:white;border:none;">
+    <h3 class="sidebar__widget-title donation-details">Chương trình đang diễn ra</h3>
+    <div class="container">
+        <div class="row tp-gx-20">
+            @if (Model != null)
+            {
+                <div class="col-md-12 tp-gx-20">
+                    <div class="donation-card-box wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">
+                        <div class="card-item">
+                            <div class="tpcard__wrapper white-bg">
+                                <div class="tpcard__img">
+                                    <a href="@Url.Action("Detail", "Browse", new { id = Model.id_project })">
+                                        <img src="@Model.img_project" alt="@Model.name_project">
+                                    </a>
+                                </div>
+                                <div class="tpcard__content" style="border: 3px solid #F1F1F1;">
+                                    <h4 class="tpcard__title">
+                                        <a href="@Url.Action("Detail", "Browse", new { id = Model.id_project })">
+                                            @Model.name_project
+                                        </a>
+                                    </h4>
+                                    <div class="tpcard__progresss">
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" aria-label="Example with label"
+                                                 style="width: @(Model.PercentContributed)%;" aria-valuenow="@Model.PercentContributed"
+                                                 aria-valuemin="0" aria-valuemax="100">
+                                                <span>@Model.PercentContributed%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tpcard__bottom d-flex justify-content-between">
+                                        <div class="tpcard__details">
+                                            <span class="subtitle">Đã quyên góp</span> <br>
+                                            <span class="sale">$@(Model.TotalContributed)</span>
+                                        </div>
+                                        <div class="tpcard__details">
+                                            <span class="subtitle">Còn lại</span> <br>
+                                            <span class="sale">@Model.RemainingDays ngày</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
